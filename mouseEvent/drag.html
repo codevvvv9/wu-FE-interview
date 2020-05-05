@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>做一个可以鼠标拖曳的div</title>
+    <style>
+      #drag {
+        border: 1px solid rebeccapurple;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100px;
+        height: 100px;
+      }
+      * { margin: 0; padding: 0; }
+    </style>
+  </head>
+  <body>
+    <div id="drag">可拖曳</div>
+    <script>
+      let dragging = false;
+      let coords = null; // 存放div的位置信息
+
+      drag.addEventListener("mousedown", function (e) {
+        dragging = true;
+        coords = [e.clientX, e.clientY];
+      });
+
+      // 监听document很关键
+      document.addEventListener("mousemove", (e) => {
+        if (!dragging) {
+          return;
+        }
+        console.log("hi");
+        const x = e.clientX;
+        const y = e.clientY;
+        const deltaX = x - coords[0];
+        const deltaY = y - coords[1];
+        const left = parseInt(drag.style.left || 0);
+        const top = parseInt(drag.style.top || 0);
+        drag.style.left = left + deltaX + "px";
+        drag.style.top = top + deltaY + "px";
+        coords = [x, y];
+      });
+
+      document.addEventListener("mouseup", (e) => {
+        dragging = false;
+      });
+    </script>
+  </body>
+</html>
