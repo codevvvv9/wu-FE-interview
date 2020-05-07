@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Promise与async\await</title>
+  <style>
+    .circle {
+      /* transition-property: width, height, margin-left, margin-top; */
+      transition-duration: 2s;
+      position: fixed;
+      transform: translateX(-50%) translateY(-50%);
+      background-color: red;
+      border-radius: 50%;
+    }
+  </style>
+</head>
+
+<body>
+  <button onclick="showCircle(150, 150, 100)">showCircle(150, 150, 100)</button>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="./promise.js"></script>
+  <script src="../07/promise-loadImage.js"></script>
+  <script>
+    loadImageAsync("https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg").then((result) => {
+      console.log('result', result);
+
+    }).catch((err) => {
+      console.log('err', err);
+
+    });
+    function showCircle(cx, cy, radius) {
+      let div = document.createElement('div')
+      div.setAttribute("style", `width: 0; height: 0;left: ${cx}px; top: ${cy}px;`)
+      div.className = 'circle'
+      document.body.append(div)
+
+      setTimeout(() => {
+        div.style.width = radius * 2 + 'px';
+        div.style.height = radius * 2 + 'px';
+      }, 0);
+    }
+    // function showCircle(cx, cy, radius) {
+    //   let div = document.createElement('div');
+    //   div.style.width = 0;
+    //   div.style.height = 0;
+    //   div.style.left = cx + 'px';
+    //   div.style.top = cy + 'px';
+    //   div.className = 'circle';
+    //   document.body.append(div);
+
+    //   setTimeout(() => {
+    //     div.style.width = radius * 2 + 'px';
+    //     div.style.height = radius * 2 + 'px';
+    //   }, 0);
+    // }
+  </script>
+</body>
+
+</html>
