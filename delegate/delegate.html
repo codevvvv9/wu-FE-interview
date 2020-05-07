@@ -1,0 +1,41 @@
+<!--
+@author wushaolin
+@email wslsdust@163.com
+@create date 2020-05-05 20:58:18
+@modify date 2020-05-05 20:58:18
+@desc [学习高级的事件委托]
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>事件委托</title>
+</head>
+<body>
+  <ul id="ul">
+    <li>
+      <span>li中的span</span>
+    </li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+  </ul>
+  <script src="./delegate.js"></script>
+  <script>
+    let ul = document.getElementById("ul")
+    delegate(ul, "click", "li", function (params) {
+      console.log('li被点击了');
+    })
+    // 以下的写法在li中有元素时不生效
+    // ul.addEventListener("click", e => {
+    //   if (e.target.tagName.toLowerCase() === "li") {
+    //     console.log("li");
+        
+    //   }
+    // })
+  </script>
+</body>
+</html>
