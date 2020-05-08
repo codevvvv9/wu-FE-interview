@@ -31,15 +31,15 @@ function printErrorInfo(errorInfo) {
   //   reject() //我没搞定，后面的成功函数不要执行了
   // })
 
-  //以上很长的return可以用以下的代替
+  // 以上很长的return可以用以下的代替
   // return Promise.reject("我没搞定")
 
   // 同样的这里可以进行兜底操作，就认为成功了
-  return Promise.resolve("wushaolin") //重新引导进入后续的正确函数的回调里面
+  // return Promise.resolve("wushaolin") //重新引导进入后续的正确函数的回调里面
 }
 function printErrorInfo2(errorInfo2) {
   console.log("errorInfo2 is:", errorInfo2);
-  // return Promise.reject("第二次我没搞定")
+  return Promise.reject("第二次我没搞定")
 }
 function printErrorInfo3(errorInfo3) {
   console.log("errorInfo3 is:", errorInfo3);
