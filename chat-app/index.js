@@ -14,5 +14,16 @@ app.use(express.static('public'))
 //设置socket.io  在服务端的配置
 let io = socket(server)
 io.on('connection', (socket) => {
-  console.log('实现socket连接', socket.id);
+  console.log('实现socket连接' );
+
+  //获取客户端发送的数据 （chat）
+  socket.on("chat", (message) => {
+    io.sockets.emit("chat", message)
+  })
+
+  //获取客户端发送的数据(typing)
+  socket.on("typing", (message) => {
+    //socket.io的广播方法
+    socket.broadcast.emit("typing", message)
+  })
 })
