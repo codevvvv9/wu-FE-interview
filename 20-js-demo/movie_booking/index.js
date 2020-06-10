@@ -11,6 +11,9 @@ let ticketPrice = +movieSelect.value
  */
 function updateSelectedCount() {
   const selectedSeats = document.querySelectorAll(".row .seat.selected")
+  //本地存储所选座位的位置
+  const seatsIndex = [...selectedSeats].map(seat => [...seats].indexOf(seat))
+  localStorage.setItem("selectedSeats", JSON.stringify(seatsIndex))
   const selectedSeatsCount = selectedSeats.length
 
   count.innerHTML = selectedSeatsCount
@@ -18,10 +21,21 @@ function updateSelectedCount() {
 }
 
 /**
+ * 存储选择电影的信息
+ * @param { string } movieIndex 所选电影的下拉框位置
+ * @param { string } moviePrice 所选电影的票价
+ */
+function setMovieData(movieIndex, moviePrice) {
+  localStorage.setItem("selectedMovieIndex", movieIndex)
+  localStorage.setItem("selectedMoviePrice", moviePrice)
+}
+/**
  * 电影下拉框事件监听
  */
 movieSelect.addEventListener("change", e => {
   ticketPrice = +e.target.value
+  //本地存储所选电影、所选电影的票价
+  setMovieData(e.target.selectedIndex, e.target.value)
   updateSelectedCount()
 })
 
