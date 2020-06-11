@@ -6,6 +6,7 @@ const movieSelect = document.getElementById("select-movie")
 //获得所选电影的票价 并且转换为number
 let ticketPrice = +movieSelect.value
 
+populateUI()
 /**
  * 更新座位数以及总票价
  */
@@ -29,6 +30,39 @@ function setMovieData(movieIndex, moviePrice) {
   localStorage.setItem("selectedMovieIndex", movieIndex)
   localStorage.setItem("selectedMoviePrice", moviePrice)
 }
+
+/**
+ * 获取本地数据并渲染样式
+ */
+function populateUI() {
+  const selectedSeats = JSON.parse(localStorage.getItem("selectedSeats"))
+  console.log("populateUI -> selectedSeats", selectedSeats)
+  //获取本地座次
+  if (selectedSeats !== null && selectedSeats.length > 0) {
+    seats.forEach((seat, index) => {
+      if (selectedSeats.indexOf(index) > -1) {
+        seat.classList.add("selected")
+      }
+    })
+  }
+
+  //获取电影以及票价
+  const selectedMovieIndex = localStorage.getItem("selectedMovieIndex")
+  if (selectedMovieIndex !== null) {
+    //存了说明改变过，没存说明默认选的是第一部电影
+    movieSelect.selectedIndex = selectedMovieIndex
+  } else {
+    movieSelect.selectedIndex = 0
+  }
+  const selectedMoviePrice = localStorage.getItem("selectedMoviePrice")
+  if (selectedMoviePrice !== null) {
+    //存了说明改变过，没存说明默认选的是第一部电影
+    ticketPrice = selectedMoviePrice
+  } else {
+    ticketPrice = 32
+  }
+  
+}
 /**
  * 电影下拉框事件监听
  */
@@ -46,3 +80,6 @@ container.addEventListener("click", e => {
   }
   updateSelectedCount()
 })
+
+//设置初始座位以及总票价
+updateSelectedCount()
