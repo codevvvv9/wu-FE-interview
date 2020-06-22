@@ -5,7 +5,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    count: 22,
+    count: 2222,
     todos: [
       {
         id: 0,

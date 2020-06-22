@@ -3,13 +3,13 @@
     <p>{{ count }}</p>
     <p>{{ completedTodos }}</p>
     <p>{{ completedTodosCount }}</p>
-    <p>{{ getTodosById(0) }}</p>
+    <p>{{ getTodosById(1) }}</p>
   </div>
 </template>
 
 <script>
 import HelloWorld from "./components/HelloWorld.vue";
-import { mapState } from "vuex";
+import { mapState, mapGetters } from "vuex";
 export default {
   name: "App",
   components: {
@@ -27,23 +27,26 @@ export default {
   //   count: state => state.count,
   //   todos: state => state.todos
   // })
-  //state && computed
+  //state && mapState
   // computed: mapState(["count", "todos"])
-  computed: {
-    count() {
-      //执行的是count的返回值
-      return this.$store.getters.count;
-    },
-    completedTodos() {
-      return this.$store.getters.completedTodos;
-    },
-    completedTodosCount() {
-      return this.$store.getters.completedTodosCount
-    },
-    getTodosById() {
-      return this.$store.getters.getTodosById
-    }
-  }
+
+  // state && mapGetters
+  // computed: {
+  //   count() {
+  //     //执行的是count的返回值
+  //     return this.$store.getters.count;
+  //   },
+  //   completedTodos() {
+  //     return this.$store.getters.completedTodos;
+  //   },
+  //   completedTodosCount() {
+  //     return this.$store.getters.completedTodosCount
+  //   },
+  //   getTodosById() {
+  //     return this.$store.getters.getTodosById
+  //   }
+  // }
+  computed: mapGetters(["count", "completedTodos", "completedTodosCount", "getTodosById"])
 };
 </script>
 
