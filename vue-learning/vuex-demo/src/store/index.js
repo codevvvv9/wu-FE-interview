@@ -30,12 +30,41 @@ export default new Vuex.Store({
     },
     decrementCount(state, payload) {
       state.count -= payload.amount
+    },
+    fetchTodos(state, todos) {
+      state.todos = todos
     }
   },
-  actions: {},
+  actions: {
+    // incrementCountAsync(context) {
+    //   setTimeout(() => {
+    //     context.commit("incrementCount")
+    //   }, 2000);
+    // },
+    // decrementCountAsync(context, payload) {
+    //   setTimeout(() => {
+    //     context.commit("decrementCount", payload)
+    //   }, 2000);
+    // }
+    //以上写法可以使用解构
+    incrementCountAsync({commit}) {
+      setTimeout(() => {
+        commit("incrementCount")
+      }, 2000);
+    },
+    decrementCountAsync({commit}, payload) {
+      setTimeout(() => {
+        commit("decrementCount", payload)
+      }, 2000);
+    },
+    async fetchTodos({commit}) {
+      const response = axios.get("https://jsonplaceholder.typicode.com/todos?_limit=10")
+      commit("fetchTodos", response)
+    }
+  },
   modules: {},
   getters: {
-    // count: (state) => ++state.count,
+    count: (state) => state.count,
     completedTodos: (state) => {
       return state.todos.filter(todo => todo.completed);
     },

@@ -7,9 +7,19 @@
     <p>{{ getTodosById(1) }}</p> -->
 
     <!-- mutations -->
-    <button @click="decrementCount({amount: 1})">-</button>
+    <!-- <button @click="decrementCount({amount: 1})">-</button>
     <span>{{ count }}</span>
-    <button @click="incrementCount">+</button>
+    <button @click="incrementCount">+</button> -->
+
+    <!-- actions -->
+    <button @click="decrement({amount: 1})">-</button>
+    <span>{{ count }}</span>
+    <button @click="increment">+</button>
+
+    <br>
+    <!-- 异步action获取数据-->
+    <span>{{completedTodos}}</span>
+    <button @click="fetchTodos">获取todos</button>
   </div>
 </template>
 
@@ -21,14 +31,14 @@ export default {
   components: {
     HelloWorld
   },
-  computed: {
-    count() {
-      return this.$store.state.count
-    },
-    // todos() {
-    //   return this.$store.state.todos
-    // }
-  },
+  // computed: {
+  //   count() {
+  //     return this.$store.state.count
+  //   },
+  //   todos() {
+  //     return this.$store.state.todos
+  //   }
+  // },
   // computed: mapState({
   //   count: state => state.count,
   //   todos: state => state.todos
@@ -52,7 +62,7 @@ export default {
   //     return this.$store.getters.getTodosById
   //   }
   // }
-  // computed: mapGetters(["count", "completedTodos", "completedTodosCount", "getTodosById"])
+  computed: mapGetters(["count", "completedTodos", "completedTodosCount", "getTodosById"]),
 
   // mutations & mapMutations
   // methods: {
@@ -63,7 +73,20 @@ export default {
   //     this.$store.commit("incrementCount")
   //   }
   // }
-  methods: mapMutations(["incrementCount", "decrementCount"])
+  // methods: mapMutations(["incrementCount", "decrementCount"])
+
+  //actions
+  methods: {
+    increment() {
+      this.$store.dispatch("incrementCountAsync")
+    },
+    decrement(payload) {
+      this.$store.dispatch("decrementCountAsync", payload)
+    },
+    fetchTodos() {
+      this.$store.dispatch("fetchTodos")
+    }
+  }
 };
 </script>
 
