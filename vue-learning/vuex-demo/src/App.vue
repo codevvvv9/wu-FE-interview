@@ -12,20 +12,28 @@
     <button @click="incrementCount">+</button> -->
 
     <!-- actions -->
-    <button @click="decrement({amount: 1})">-</button>
+    <!-- <button @click="decrement({amount: 1})">-</button>
     <span>{{ count }}</span>
-    <button @click="increment">+</button>
+    <button @click="increment">+</button> -->
 
-    <br>
+    <!-- <br> -->
     <!-- 异步action获取数据-->
-    <span>{{completedTodos}}</span>
-    <button @click="fetchTodos">获取todos</button>
+    <!-- <div>{{completedTodos}}</div>
+    <button @click="fetchTodos">获取todos</button> -->
+
+    <!-- mapActions -->
+    <button @click="decrementCountAsync({amount: 2})">-</button>
+    <span>{{ count }}</span>
+    <button @click="incrementCountAsync">+</button>
+    <br>
+    <div>{{completedTodos}}</div>
+    <button @click="fetchTodos">拉取数据</button>
   </div>
 </template>
 
 <script>
 import HelloWorld from "./components/HelloWorld.vue";
-import { mapState, mapGetters, mapMutations } from "vuex";
+import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
 export default {
   name: "App",
   components: {
@@ -76,17 +84,18 @@ export default {
   // methods: mapMutations(["incrementCount", "decrementCount"])
 
   //actions
-  methods: {
-    increment() {
-      this.$store.dispatch("incrementCountAsync")
-    },
-    decrement(payload) {
-      this.$store.dispatch("decrementCountAsync", payload)
-    },
-    fetchTodos() {
-      this.$store.dispatch("fetchTodos")
-    }
-  }
+  // methods: {
+  //   increment() {
+  //     this.$store.dispatch("incrementCountAsync")
+  //   },
+  //   decrement(payload) {
+  //     this.$store.dispatch("decrementCountAsync", payload)
+  //   },
+  //   fetchTodos() {
+  //     this.$store.dispatch("fetchTodos")
+  //   }
+  // }
+  methods: mapActions(["incrementCountAsync", "decrementCountAsync", "fetchTodos"])
 };
 </script>
 

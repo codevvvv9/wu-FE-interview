@@ -31,7 +31,7 @@ export default new Vuex.Store({
     decrementCount(state, payload) {
       state.count -= payload.amount
     },
-    fetchTodos(state, todos) {
+    setTodos(state, todos) {
       state.todos = todos
     }
   },
@@ -58,8 +58,8 @@ export default new Vuex.Store({
       }, 2000);
     },
     async fetchTodos({commit}) {
-      const response = axios.get("https://jsonplaceholder.typicode.com/todos?_limit=10")
-      commit("fetchTodos", response)
+      const response = await axios.get("https://jsonplaceholder.typicode.com/todos?_limit=10")
+      commit("setTodos", response.data)
     }
   },
   modules: {},
