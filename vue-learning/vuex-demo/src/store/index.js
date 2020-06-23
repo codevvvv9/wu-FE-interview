@@ -5,7 +5,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    count: 2222,
+    count: 1,
     todos: [
       {
         id: 0,
@@ -24,11 +24,18 @@ export default new Vuex.Store({
       },
     ],
   },
-  mutations: {},
+  mutations: {
+    incrementCount(state) {
+      state.count++
+    },
+    decrementCount(state, payload) {
+      state.count -= payload.amount
+    }
+  },
   actions: {},
   modules: {},
   getters: {
-    count: (state) => ++state.count,
+    // count: (state) => ++state.count,
     completedTodos: (state) => {
       return state.todos.filter(todo => todo.completed);
     },

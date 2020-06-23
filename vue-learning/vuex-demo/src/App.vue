@@ -1,28 +1,34 @@
 <template>
   <div id="app">
-    <p>{{ count }}</p>
+    <!-- state & getters -->
+    <!-- <p>{{ count }}</p>
     <p>{{ completedTodos }}</p>
     <p>{{ completedTodosCount }}</p>
-    <p>{{ getTodosById(1) }}</p>
+    <p>{{ getTodosById(1) }}</p> -->
+
+    <!-- mutations -->
+    <button @click="decrementCount({amount: 1})">-</button>
+    <span>{{ count }}</span>
+    <button @click="incrementCount">+</button>
   </div>
 </template>
 
 <script>
 import HelloWorld from "./components/HelloWorld.vue";
-import { mapState, mapGetters } from "vuex";
+import { mapState, mapGetters, mapMutations } from "vuex";
 export default {
   name: "App",
   components: {
     HelloWorld
   },
-  // computed: {
-  //   count() {
-  //     return this.$store.state.count
-  //   },
-  //   todos() {
-  //     return this.$store.state.todos
-  //   }
-  // }
+  computed: {
+    count() {
+      return this.$store.state.count
+    },
+    // todos() {
+    //   return this.$store.state.todos
+    // }
+  },
   // computed: mapState({
   //   count: state => state.count,
   //   todos: state => state.todos
@@ -46,7 +52,18 @@ export default {
   //     return this.$store.getters.getTodosById
   //   }
   // }
-  computed: mapGetters(["count", "completedTodos", "completedTodosCount", "getTodosById"])
+  // computed: mapGetters(["count", "completedTodos", "completedTodosCount", "getTodosById"])
+
+  // mutations & mapMutations
+  // methods: {
+  //   decrement(n) {
+  //     this.$store.commit("decrementCount", n)
+  //   },
+  //   increment() {
+  //     this.$store.commit("incrementCount")
+  //   }
+  // }
+  methods: mapMutations(["incrementCount", "decrementCount"])
 };
 </script>
 
