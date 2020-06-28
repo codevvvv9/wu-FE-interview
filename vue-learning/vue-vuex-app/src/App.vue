@@ -20,6 +20,19 @@ export default {
     AddTodo,
     FilterTodos,
   },
+  created() {
+    this.testSpring()
+  },
+  methods: {
+    async testSpring() {
+      await axios.get("/spring/test").then((result) => {
+      console.log('result', result);
+      
+    }).catch((err) => {
+      
+    });
+    }
+  },
 };
 </script>
 
