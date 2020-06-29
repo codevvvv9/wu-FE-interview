@@ -1,7 +1,7 @@
 module.exports = {
   devServer: {
     proxy: {
-      '/spring': {
+      '/api': {
         target: 'http://localhost:8082/',
         ws: true,
         changeOrigin: true

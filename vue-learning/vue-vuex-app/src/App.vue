@@ -18,21 +18,21 @@ export default {
   components: {
     Todos,
     AddTodo,
-    FilterTodos,
+    FilterTodos
   },
   created() {
-    this.testSpring()
+    this.testSpring();
   },
   methods: {
-    async testSpring() {
-      await axios.get("/spring/test").then((result) => {
-      console.log('result', result);
-      
-    }).catch((err) => {
-      
-    });
+    testSpring() {
+      axios
+        .get("/api/users")
+        .then(result => {
+          console.log("result", result);
+        })
+        .catch(err => {});
     }
-  },
+  }
 };
 </script>
 
