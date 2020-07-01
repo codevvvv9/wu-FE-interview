@@ -31,7 +31,7 @@ function checkRequiredTs(inputNodeArr: Array<Element>): void {
   })
 }
 
-function getKeywords(inputNode: HTMLElement): string {
-  let requiredWord: string = inputNode.placeholder
-  return requiredWord.slice(3)
-}
+// function getKeywords(inputNode: HTMLElement): string {
+//   let requiredWord: string = inputNode.placeholder
+//   return requiredWord.slice(3)
+// }
