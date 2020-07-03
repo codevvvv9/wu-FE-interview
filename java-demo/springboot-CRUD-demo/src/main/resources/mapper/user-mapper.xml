@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wushao.testSpring.dao.UserDao">
+    <!--    <select id="findAll" resultType="com.wushao.testSpring.entity.User">select * from test_spring.user;</select>-->
+    <!--    <select id="findOneById" resultType="com.wushao.testSpring.entity.User">-->
+    <!--        select * from test_spring.user where id= #{id};-->
+    <!--    </select>-->
+    <select id="findOneById" parameterType="java.lang.Integer" resultType="com.wushao.testSpring.entity.User">
+        select * from test_spring.user where id= #{id};
+    </select>
+    <update id="updateUser">
+        update test_spring.user set name = #{user.name} where id = #{user.id}
+    </update>
+    <delete id="deleteUserById">
+        delete from test_spring.user  where id = #{id}
+    </delete>
+    <insert id="addUser">
+        INSERT INTO test_spring.user (name) VALUES (#{user.name})
+    </insert>
+</mapper>
