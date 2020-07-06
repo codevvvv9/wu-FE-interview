@@ -1,8 +1,8 @@
-const formTs: Element = document.getElementById("form")
-const usernameTs: Element = document.getElementById("username")
-const emailTs: Element = document.getElementById("email")
-const passwordTs: Element = document.getElementById("password")
-const confirmPasswordTs: Element = document.getElementById("confirmPassword")
+const formTs: HTMLElement = document.getElementById("form")
+const usernameTs: HTMLElement = document.getElementById("username")
+const emailTs: HTMLElement = document.getElementById("email")
+const passwordTs: HTMLElement = document.getElementById("password")
+const confirmPasswordTs: HTMLElement = document.getElementById("confirmPassword")
 
 /**
  * 显示form item的错误信息
@@ -31,7 +31,7 @@ function checkRequiredTs(inputNodeArr: Array<Element>): void {
   })
 }
 
-// function getKeywords(inputNode: HTMLElement): string {
-//   let requiredWord: string = inputNode.placeholder
-//   return requiredWord.slice(3)
-// }
+function getKeywords(inputNode: HTMLInputElement): string {
+  let requiredWord: string = inputNode.placeholder
+  return requiredWord.slice(3)
+}
