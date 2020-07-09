@@ -9,14 +9,14 @@ const confirmPasswordTs: HTMLElement = document.getElementById("confirmPassword"
  * @param inputNode 
  * @param message 
  */
-function showErrorInfo(inputNode: HTMLElement , message: string): void {
+function showErrorInfo(inputNode: HTMLInputElement , message: string): void {
   const parentNode: HTMLElement = inputNode.parentElement
   parentNode.className = "form-control error"
   const small: HTMLElement  = parentNode.querySelector("small")
   small.innerHTML = message
 }
 
-function showSuccessInfo(inputNode: HTMLElement): void {
+function showSuccessInfo(inputNode: HTMLInputElement): void {
   const parentNode: HTMLElement = inputNode.parentElement
   parentNode.className = "form-control success"
 }
