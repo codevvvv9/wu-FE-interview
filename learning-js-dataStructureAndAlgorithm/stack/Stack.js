@@ -19,6 +19,10 @@ function Stack() {
     return items.pop()
   }
 
+  /**
+   * 查看栈顶的元素
+   * @return 栈中最后一个元素
+   */
   this.peek = function () {
     return items[items.length - 1]
 
