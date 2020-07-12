@@ -1,6 +1,9 @@
+#!/usr/bin/env node
 const { program } = require("commander");
 const api = require("./index");
-program.option("-x, --xxx", "what the x");
+const pkg = require("./package.json")
+
+program.version(pkg.version); //增加版本号
 // program
 //   .command("add <taskName>") // <taskName>里面的taskName 会作为参数传入到action函数里面, 只接受一个单词
 //   .description("add a new task")
