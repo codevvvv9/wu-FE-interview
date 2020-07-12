@@ -6,6 +6,7 @@
   "author": "WuShaoLin",
   "license": "MIT",
   "dependencies": {
-    "commander": "^5.1.0"
+    "commander": "^5.1.0",
+    "inquirer": "^7.3.1"
   }
 }

@@ -28,8 +28,8 @@ const db = {
           list = JSON.parse(data.toString());
         } catch (error) {
           list = [];
-          resolve(list)
         }
+        resolve(list)
       });
     });
   },
