@@ -37,8 +37,9 @@ program
         console.log("清空任务失败： ", error);
       })
   });
-// program.parse(process.argv); //node cli.js 默认在控制台打印全部信息
-if (process.argv.length === 2) {
-  //node cli.js 如果只写这两个参数，证明用户只想看看所有的任务列表
-  api.showAll()
-}
+  if (process.argv.length === 2) {
+    //node cli.js 如果只写这两个参数，证明用户只想看看所有的任务列表
+    api.showAll()
+    return
+  }
+  program.parse(process.argv); //node cli.js 默认在控制台打印全部信息
