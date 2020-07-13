@@ -3,14 +3,22 @@
   "bin": {
     "t": "cli.js"
   },
-  "files": ["*.js"],
+  "files": [
+    "*.js"
+  ],
   "version": "0.0.2",
   "description": "todo",
   "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
   "author": "WuShaoLin",
   "license": "MIT",
   "dependencies": {
     "commander": "^5.1.0",
     "inquirer": "^7.3.1"
+  },
+  "devDependencies": {
+    "jest": "^26.1.0"
   }
 }
