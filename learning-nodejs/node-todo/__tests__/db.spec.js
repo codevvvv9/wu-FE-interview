@@ -1,7 +1,9 @@
 const db = require('../db.js')
+const fs = require('fs')
+jest.mock('fs')
 
 describe("db", () => {
   it("can read", () => {
-    expect(db.read instanceof Function).toBe(true)
+    expect(fs.test()).toBe("xxx")
   })
 })
