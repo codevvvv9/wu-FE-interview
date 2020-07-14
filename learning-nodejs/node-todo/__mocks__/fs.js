@@ -1,17 +1,19 @@
+const { write } = require("../db");
+
 const fs = jest.genMockFromModule('fs');
 const _fs = jest.requireActual('fs')
 
 Object.assign(fs, _fs)
 
-const mocks = {}
+let readMocks = {}
 /**
  * jest构造的假函数进行拦截
  * @param { string } path 路径
  * @param { object } error 错误信息
  * @param { object } data 真实数据
  */
-fs.setMock = (path, error, data) => {
-  mocks[path] = [error, data]
+fs.setReadMock = (path, error, data) => {
+  readMocks[path] = [error, data]
 }
 /**
  * 模拟fs的读取函数，进行拦截
@@ -25,10 +27,29 @@ fs.readFile = (path, options, callback) => {
     callback = options
   }
   //path在mocks中，说明被拦截到了
-  if (path in mocks) {
-    callback(...mocks[path])
+  if (path in readMocks) {
+    callback(...readMocks[path])
   } else {
     _fs.readFile(path, options, callback)
   }
+}
+
+let writeMocks = {}
+
+fs.setWriteMock = (path, fn) => {
+  writeMocks[path] = fn
+}
+
+fs.writeFile = (path, data, options, callback) => {
+  if (path in writeMocks) {
+    writeMocks[path](path, data, options, callback)
+  } else {
+    _fs.writeFile(path, data, options, callback)
+  }
+}
+
+fs.clearMocks = () => {
+  readMocks = {}
+  writeMocks = {}
 }
 module.exports = fs;
