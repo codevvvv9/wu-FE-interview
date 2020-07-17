@@ -17,7 +17,22 @@ function LinkedList() {
    * @param { object } element 链表的元素
    */
   this.append = function (element) {
-    
+    let node = new Node(element) // 1
+    current // 2
+
+    if (head === null) {//列表中第一个节点 // 3
+      head = node
+    } else {
+      current = head // 4
+
+      //循环列表找到最后一项
+      while (current.next) {
+        current = current.next
+      }
+      //找到最后一项 将其next赋给node,建立链接
+      current.next = node // 5
+    }
+    length++ //更新列表长度
   };
   /**
    * 向链表特定位置插入一个新的项
