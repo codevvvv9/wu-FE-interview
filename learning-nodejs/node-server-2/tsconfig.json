@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "amd",
+    "sourceMap": true,
+    "strictNullChecks": true,
+    "noImplicitAny": false,
+    "noImplicitReturns": true,
+    "noImplicitThis": false,
+    "noUnusedParameters": false,
+    "noUnusedLocals": true,
+    "experimentalDecorators": false,
+    "emitDecoratorMetadata": false,
+    "removeComments": true,
+    "outFile": "../js/ts.js"
+  },
+  "exclude": [
+    "node_modules",
+    "../node_modules",
+    "../../node_modules"
+  ]
+}

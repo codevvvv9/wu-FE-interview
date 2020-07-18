@@ -1,0 +1,10 @@
+{
+  "name": "node-server-2",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "wushao",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^14.0.23"
+  }
+}
