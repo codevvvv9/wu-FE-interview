@@ -6,9 +6,15 @@ import * as url from "url";
 const server = http.createServer();
 const publicPath = path.resolve(__dirname, "public");
 server.on('request', (request: http.IncomingMessage, response: http.ServerResponse) => {
-  const { url: requestUrl } = request
+  const { url: requestUrl, method } = request
   let truePath = requestUrl || ""
   const {pathname} = url.parse(truePath)
+  //静态服务器只能做get请求
+  if (method !== "GET") {
+    response.statusCode = 405
+    response.end("非法操作！！！")
+    return 
+  }
   const filename = pathname?.substr(1) || "index.html"
   fs.readFile(path.resolve(publicPath, filename), (err, data) => {
     if (err) {
