@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "module": "amd",
+    "module": "commonjs",
     "sourceMap": true,
     "strictNullChecks": true,
     "noImplicitAny": false,
@@ -11,8 +11,7 @@
     "noUnusedLocals": true,
     "experimentalDecorators": false,
     "emitDecoratorMetadata": false,
-    "removeComments": true,
-    "outFile": "../js/ts.js"
+    "removeComments": true
   },
   "exclude": [
     "node_modules",
