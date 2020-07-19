@@ -15,6 +15,12 @@ server.on('request', (request:http.IncomingMessage, response:http.ServerResponse
   request.on('end', () => {
     const body = Buffer.concat(array).toString()
     console.log('body is', body);
+    //接受数据完毕后可以更改response
+    response.statusCode = 400
+    response.setHeader('Content-Type', 'testtest')
+    response.write('1\n')
+    response.write('2\n')
+    response.write('3\n')
     response.end('hi');
   })
 })
