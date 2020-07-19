@@ -10,32 +10,14 @@ server.on('request', (request: http.IncomingMessage, response: http.ServerRespon
   let truePath = requestUrl || ""
   const {pathname, search} = url.parse(truePath)
   console.log("search", search)
-
-  switch (pathname) {
-    case "/index.html":
-      response.setHeader("Content-Type", "text/html; charset=utf-8")
-      fs.readFile(path.resolve(publicPath, "index.html"), (err, data) => {
-        if (err) throw err
-        response.end(data.toString())
-      })
-      break;
-    case "/style.css":
-      response.setHeader("Content-Type", "text/css; charset=utf-8")
-      fs.readFile(path.resolve(publicPath, "style.css"), (err, data) => {
-        if (err) throw err
-        response.end(data.toString())
-      })
-      break;
-    case "/main.js":
-      response.setHeader("Content-Type", "text/javascript; charset=utf-8")
-      fs.readFile(path.resolve(publicPath, "main.js"), (err, data) => {
-        if (err) throw err
-        response.end(data.toString())
-      })
-      break;
-    default:
-      break;
-  }
+  const filename = pathname?.substr(1) || ""
+  fs.readFile(path.resolve(publicPath, filename), (err, data) => {
+    if (err) {
+      response.statusCode = 404
+      response.end("你访问的文件不存在")
+    }
+    response.end(data.toString())
+  })
 })
 
 server.listen(8888, () => {
