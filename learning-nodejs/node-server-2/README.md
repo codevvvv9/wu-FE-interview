@@ -8,6 +8,11 @@
 7. server.listen(port),服务器监听一个具体的端口
 8. 客户端模拟get访问数据（`curl -v http://localhost:port`）
 9. 客户端模拟post访问数据（`curl -v -d "dataContent" http://localhost:port`）
+
+项目启动命令
+```javascript
+ts-node-dev index.ts
+```
 ### get请求的小知识
 1. request.method获取请求的动词
 2，request.url获取请求路径（含查询参数）

@@ -8,15 +8,22 @@ const publicPath = path.resolve(__dirname, "public");
 server.on('request', (request: http.IncomingMessage, response: http.ServerResponse) => {
   const { url: requestUrl } = request
   let truePath = requestUrl || ""
-  const {pathname, search} = url.parse(truePath)
-  console.log("search", search)
-  const filename = pathname?.substr(1) || ""
+  const {pathname} = url.parse(truePath)
+  const filename = pathname?.substr(1) || "index.html"
   fs.readFile(path.resolve(publicPath, filename), (err, data) => {
     if (err) {
-      response.statusCode = 404
-      response.end("你访问的文件不存在")
+      if (err.errno === -2) {
+        response.statusCode = 404
+        fs.readFile(path.resolve(publicPath, "404.html"), (err, data) => {
+          response.end(data)
+        })
+      } else {
+        response.statusCode = 500
+        response.end("服务器繁忙，稍后再试……")
+      }
+    } else {
+      response.end(data)
     }
-    response.end(data.toString())
   })
 })
 
