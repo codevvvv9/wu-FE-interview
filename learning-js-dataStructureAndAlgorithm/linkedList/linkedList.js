@@ -17,7 +17,7 @@ function LinkedList() {
    * @param { object } element 链表的元素
    */
   this.append = function (element) {
-    let node = new Node(element) // 1
+    let node = new Node(element), // 1
     current // 2
 
     if (head === null) {//列表中第一个节点 // 3
@@ -44,7 +44,34 @@ function LinkedList() {
    * 从链表特定位置删除一项
    * @param { string } position 
    */
-  this.removeAt = function (position) {};
+  this.removeAt = function (position) {
+    //检查越界值
+    if (position > -1 && position < length) {  
+      let current = head,
+        previous,
+        index = 0;
+      
+      //移除第一项
+      if(position === 0) {
+        head = current.next
+      } else {
+
+        while (index++ < position) {
+          previous = current
+          current = current.next
+        }
+
+        //将previous与current的下一项连接起来：跳过current,从来移除他
+        previous.next = current.next
+      }
+
+      length--
+
+      return current.element
+    } else {
+      return null
+    }
+  };
   /**
    * 从链表移除一项
    * @param { object } element 
