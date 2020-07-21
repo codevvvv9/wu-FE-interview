@@ -32,4 +32,7 @@ server.on('request', (request, response) => {})
 从stream.Readable类继承了data/end/error事件
 不能直接拿到请求的消息体，与TCP有关，需要使用request.on事件监听，防止一次发送失败后无法断点续传。
 - 其中response拥有getHeader/setHeader/end/write等方法
-拥有statusCode属性，也继承自Stream,目前用不上
+拥有statusCode属性，也继承自Stream
+
+## 业界成熟的静态服务器对比
+学习`http-server`和`node stati`

@@ -5,6 +5,10 @@ import * as url from "url";
 
 const server = http.createServer();
 const publicPath = path.resolve(__dirname, "public");
+console.log("process.argv", process.argv);
+let cacheAge: number = 3600 *24 * (Number(process.argv[3])) || 3600 *24 * 100
+console.log('cacheAge', cacheAge);
+
 server.on('request', (request: http.IncomingMessage, response: http.ServerResponse) => {
   const { url: requestUrl, method } = request
   let truePath = requestUrl || ""
@@ -28,6 +32,8 @@ server.on('request', (request: http.IncomingMessage, response: http.ServerRespon
         response.end("服务器繁忙，稍后再试……")
       }
     } else {
+      //返回文件内容
+      response.setHeader("Cache-control", `max-age=${cacheAge}, public`)
       response.end(data)
     }
   })
