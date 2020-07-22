@@ -3,7 +3,7 @@
 2. touch index.ts
 3. yarn add --dev @types/node 安装node声明文件
 4. 引入http模块（webstorm自动引入，但是vscode需要配置`tsconfig.json`）
-5. http模块创建`server`
+5. http模块创建`server`, http.createServer()的server是http.Server的实例，继承自net.Server
 6. 监听上述创建的`server`的request事件
 7. server.listen(port),服务器监听一个具体的端口
 8. 客户端模拟get访问数据（`curl -v http://localhost:port`）
@@ -26,8 +26,8 @@ ts-node-dev index.ts
 ```javascript
 server.on('request', (request, response) => {})
 ```
-- request是http.IncomingMessage的实例
-- response是http.ServerResponse的实例
+- request是http.IncomingMessage的实例, 继承自stream.Readable
+- response是http.ServerResponse的实例, 继承自Stream
 - 其中的request有headers method url 等属性
 从stream.Readable类继承了data/end/error事件
 不能直接拿到请求的消息体，与TCP有关，需要使用request.on事件监听，防止一次发送失败后无法断点续传。

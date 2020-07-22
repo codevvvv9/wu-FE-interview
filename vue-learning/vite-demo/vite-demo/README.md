@@ -10,3 +10,4 @@ $ npm run dev
 
 ### `vue-router` for  `vue 3`
 `npm info vue-router versions`
+npm view vue-router versions
