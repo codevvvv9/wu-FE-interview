@@ -39,37 +39,65 @@ function LinkedList() {
    * @param { string } position 
    * @param { object } element 
    */
-  this.insert = function (position, element) {};
+  this.insert = function (position, element) {
+    //检查越界值
+    if (position >= 0 && position <=length) { //1
+      let node = new Node(element),
+        current = head,
+        previous,
+        index = 0;
+      
+        if (position === 0) {
+          
+          node.next = current //2
+          head = node
+        } else {
+          while (index++ < position) { //3
+            previous = current
+            current = current.next
+          }
+
+          node.next = current // 4
+          previous.next = node // 5
+        }
+
+        length++ //更新列表长度
+        return true
+
+    } else {
+      return false //6
+    }
+  };
   /**
    * 从链表特定位置删除一项
    * @param { string } position 
    */
   this.removeAt = function (position) {
     //检查越界值
-    if (position > -1 && position < length) {  
-      let current = head,
-        previous,
-        index = 0;
+    if (position > -1 && position < length) {  //（1）
+      let current = head, // 2
+        previous, // 3
+        index = 0; // 4
       
       //移除第一项
-      if(position === 0) {
+      if(position === 0) { //5
         head = current.next
       } else {
 
-        while (index++ < position) {
-          previous = current
-          current = current.next
+        while (index++ < position) { //6
+          previous = current // 7
+          current = current.next // 8
         }
 
         //将previous与current的下一项连接起来：跳过current,从来移除他
-        previous.next = current.next
+        previous.next = current.next //9
       }
 
-      length--
+      length-- //10
 
       return current.element
     } else {
-      return null
+      return null //11
     }
   };
   /**
