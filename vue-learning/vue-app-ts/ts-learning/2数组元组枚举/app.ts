@@ -32,3 +32,4 @@ enum Color2 {
 
 let myColor2: Color2 = Color2.yellow; // 124
 console.log("myColor2", myColor2)
+
