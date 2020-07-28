@@ -31,6 +31,13 @@ export default {
           console.log("result", result);
         })
         .catch(err => {});
+      // let xhr = new XMLHttpRequest()
+      // xhr.open("GET","http://localhost:8082/api/users",true);
+      // xhr.send(null);
+      // xhr.onload = function(e) {
+      //     var xhr = e.target;
+      //     console.log('xhr.responseText', xhr.responseText);
+      // }
     }
   }
 };
