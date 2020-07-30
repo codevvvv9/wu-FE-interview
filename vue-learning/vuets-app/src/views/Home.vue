@@ -1,8 +1,8 @@
 <template>
-  <div class="home"></div>
+  <div class="home">home</div>
 </template>
 
-<script>
+<script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 @Component ({
   components: {}
