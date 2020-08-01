@@ -24,7 +24,9 @@
       "dom",
       "dom.iterable",
       "scripthost"
-    ]
+    ],
+    //关闭大小写检验
+    "forceConsistentCasingInFileNames": false,
   },
   "include": [
     "src/**/*.ts",
@@ -35,5 +37,5 @@
   ],
   "exclude": [
     "node_modules"
-  ]
+  ],
 }

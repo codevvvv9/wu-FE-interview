@@ -1,4 +1,5 @@
 # vuets-app
+使用`vue-cli4+TS+element-ui`做的后台管理系统
 
 ## Project setup
 ```

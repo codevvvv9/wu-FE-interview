@@ -13,12 +13,12 @@ Vue.use(VueRouter)
   {
     path: '/login',
     name: 'login',
-    component: () => import("@/views/Login/Login.vue")
+    component: () => import("@/views/login/Login.vue")
   }, 
   {
     path: '/password',
     name: 'password',
-    component: () => import("@/views/Login/Password.vue")
+    component: () => import("@/views/login/Password.vue")
   }
 ]
 
