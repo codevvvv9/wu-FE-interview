@@ -44,6 +44,7 @@
             @click.native.prevent="handleSubmit"
             type="primary"
             style="width: 100%;"
+            :isLogin="isLogin"
           >
             登录
           </el-button>
@@ -68,7 +69,7 @@
 <script lang="ts">
 import { Component, Vue, Provide } from "vue-property-decorator";
 import LoginHeader from "./LoginHeader.vue";
-import router from '../../router/index';
+import router from "../../router/index";
 
 @Component({
   components: {
@@ -76,6 +77,7 @@ import router from '../../router/index';
   },
 })
 export default class Login extends Vue {
+  @Provide() isLogin: boolean = false;
   @Provide() ruleForm: {
     username: String;
     password: String;
@@ -94,13 +96,31 @@ export default class Login extends Vue {
   handleSubmit(): void {
     (this.$refs["ruleForm"] as any).validate((valid: boolean) => {
       if (valid) {
-        console.log("校验通过")
+        console.log("校验通过");
+        this.isLogin = false;
+        let formData = {
+          "username": this.ruleForm.username,
+          "pwd": this.ruleForm.password,
+          "autoLogin": this.ruleForm.autoLogin
+        };
+        (this as any).$axios
+          .post("/api/users/login", formData)
+          .then((res: any) => {
+            this.isLogin = false
+            //存储cookie
+            localStorage.setItem("tsToken", res.data.token)
+            this.$router.push("/")
+          })
+          .catch((error: any) => {
+            this.isLogin = false
+            console.log('login error is', error);
+          });
       }
     });
   }
 
   handleForgetPassword(): void {
-    this.$router.push("/password")
+    this.$router.push("/password");
   }
 }
 </script>
