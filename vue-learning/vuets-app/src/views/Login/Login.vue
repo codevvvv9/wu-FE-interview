@@ -44,7 +44,7 @@
             @click.native.prevent="handleSubmit"
             type="primary"
             style="width: 100%;"
-            :isLogin="isLogin"
+            :loading="isLogin"
           >
             登录
           </el-button>
@@ -90,30 +90,30 @@ export default class Login extends Vue {
 
   @Provide() rules = {
     username: [{ required: true, message: "请输入用户名", trigger: "blur" }],
-    password: [{ required: true, message: "请输入密码", trigger: "change" }],
+    password: [{ required: true, message: "请输入密码", trigger: "change" } ],
   };
 
   handleSubmit(): void {
     (this.$refs["ruleForm"] as any).validate((valid: boolean) => {
       if (valid) {
         console.log("校验通过");
-        this.isLogin = false;
+        this.isLogin = true;
         let formData = {
-          "username": this.ruleForm.username,
-          "pwd": this.ruleForm.password,
-          "autoLogin": this.ruleForm.autoLogin
+          username: this.ruleForm.username,
+          pwd: this.ruleForm.password,
+          autoLogin: this.ruleForm.autoLogin,
         };
         (this as any).$axios
           .post("/api/users/login", formData)
           .then((res: any) => {
-            this.isLogin = false
+            this.isLogin = false;
             //存储cookie
-            localStorage.setItem("tsToken", res.data.token)
-            this.$router.push("/")
+            localStorage.setItem("tsToken", res.data.token);
+            this.$router.push("/");
           })
           .catch((error: any) => {
-            this.isLogin = false
-            console.log('login error is', error);
+            this.isLogin = false;
+            console.log("login error is", error);
           });
       }
     });

@@ -41,9 +41,9 @@ service.interceptors.response.use(
     let status = error.response.status
     if (error && status) {
       switch (status) {
-        case 400:
-          errorMessage = "Bad Request 传参属性不对"
-          break;
+        // case 400:
+        //   errorMessage = "Bad Request 传参属性不对"
+        //   break;
         case 401:
           errorMessage = "Unauthorized 登录状态失效，请重新登录"
           localStorage.removeItem("tsToken")
