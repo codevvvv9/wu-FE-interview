@@ -1,5 +1,4 @@
 const crypto = require("crypto");
-const { off } = require("process");
 
 //构建魔法字符串
 const MAGIC_KEY = "258EAFA5-E914-47DA-95CA-C5AB0DC85B11";
@@ -91,7 +90,7 @@ function parseMessage(buffer) {
 }
 
 /**
- * TODO：----------------------
+ * 处理响应的数据
  * @param {  } data
  */
 function constructReply(data) {

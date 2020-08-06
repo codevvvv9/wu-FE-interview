@@ -9,7 +9,7 @@
     <script>
       let ws = new WebSocket("ws://localhost:8889");
       ws.onopen = function() {
-        ws.send(233)
+        ws.send(2)
       }
       ws.onmessage = function(data) {
         console.log('data is', data);
