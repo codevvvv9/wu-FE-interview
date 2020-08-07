@@ -68,8 +68,8 @@
 
 <script lang="ts">
 import { Component, Vue, Provide } from "vue-property-decorator";
+import { State, Getter, Mutation, Action } from "vuex-class";
 import LoginHeader from "./LoginHeader.vue";
-import router from "../../router/index";
 
 @Component({
   components: {
@@ -77,6 +77,11 @@ import router from "../../router/index";
   },
 })
 export default class Login extends Vue {
+  //引入vuex中的action，存储用户信息
+  @Action("setUser") setUser: (
+    user: String,
+    obj?: { state: any; commit: any }
+  ) => any;
   @Provide() isLogin: boolean = false;
   @Provide() ruleForm: {
     username: String;
@@ -90,7 +95,7 @@ export default class Login extends Vue {
 
   @Provide() rules = {
     username: [{ required: true, message: "请输入用户名", trigger: "blur" }],
-    password: [{ required: true, message: "请输入密码", trigger: "change" } ],
+    password: [{ required: true, message: "请输入密码", trigger: "change" }],
   };
 
   handleSubmit(): void {
@@ -109,6 +114,8 @@ export default class Login extends Vue {
             this.isLogin = false;
             //存储cookie
             localStorage.setItem("tsToken", res.data.token);
+            //存储到vuex中
+            this.setUser(res.data.token);
             this.$router.push("/");
           })
           .catch((error: any) => {

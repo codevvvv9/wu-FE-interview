@@ -88,11 +88,11 @@ export default class Password extends Vue {
           .post("/api/users/findPwd", this.ruleForm)
           .then((result: any) => {
             this.loading = false;
-            this.$message({
+            (this as any).$message({
               message: result.data.msg,
               type: "success"
             })
-            this.$router.push("/login")
+            (this as any).$router.push("/login")
           }).catch((err: any) => {
             this.loading = false;
           });

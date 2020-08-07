@@ -27,6 +27,7 @@
     ],
     //关闭大小写检验
     "forceConsistentCasingInFileNames": false,
+    "strictPropertyInitialization": false
   },
   "include": [
     "src/**/*.ts",
