@@ -7,6 +7,11 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import { State, Getter, Mutation, Action } from "vuex-class";
+//必须写这句话
+@Component({
+  components: {}
+})
+
 
 export default class App extends Vue {
   // 存储用户信息
