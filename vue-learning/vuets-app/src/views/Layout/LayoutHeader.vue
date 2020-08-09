@@ -10,7 +10,7 @@
       <el-col :xs="14" :sm="12" :md="10" :lg="8" :xl="6">
         <el-dropdown @command="userCommand" class="system-user">
           <span class="userinfo-inner">
-            <img :src="require('@/assets/' + getUser.key + '.jpg')" alt="">
+            <img :src="userImg" alt="">
             {{ getUser.username }}
           </span>
           <el-dropdown-menu slot="dropdown">
@@ -32,12 +32,10 @@ import { State, Getter, Mutation, Action } from "vuex-class";
 
 export default class LayoutHeader extends Vue {
   @Getter("user") getUser: any
-  // @Provide() imgPath: String = require(`@/assets/${this.getUser.key}.jpg`)
-  // private computed: Object = {
-  //   userImg(): String {
-  //     return require(`@/assets/${this.getUser.key}.jpg`)
-  //   }
-  // }
+  //使用计算属性的方式
+  get userImg(): String {
+    return require(`@/assets/${this.getUser.key}.jpg`)
+  }
 
   userCommand(command: string): void {
     if (command === "logout") {
@@ -46,6 +44,10 @@ export default class LayoutHeader extends Vue {
     } else if (command === "usercenter") {
       // this.$router.push("/user")
     }
+  }
+  created() {
+    console.log('this getUser', this.getUser);
+    
   }
 }
 </script>
