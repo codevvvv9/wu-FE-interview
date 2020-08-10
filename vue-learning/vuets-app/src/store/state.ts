@@ -1,7 +1,9 @@
 const state: {
-  user: String
+  user: String,
+  routers: Array<String>
 } = {
-  user: ""
+  user: "",
+  routers: []
 }
 
 export default state
