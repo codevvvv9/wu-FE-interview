@@ -82,16 +82,16 @@ function parseMessage(buffer) {
       }
 
       return Buffer.from(newBuffer).toString();
-      break;
+      // break;
     default:
       return "";
-      break;
+      // break;
   }
 }
 
 /**
  * 处理响应的数据
- * @param {  } data
+ * @param { Object } data 响应数据
  */
 function constructReply(data) {
   const json = JSON.stringify(data);

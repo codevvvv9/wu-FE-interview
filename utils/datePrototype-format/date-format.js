@@ -1,3 +1,7 @@
+/**
+ * 把时间戳按照format要求的格式格式成想要的格式
+ * @param { String } format 想要格式化的格式
+ */
 Date.prototype.format = function (format) {
   var o = {
       "M+": this.getMonth() + 1,
