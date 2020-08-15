@@ -11,6 +11,7 @@
         :key="item.name"
       >
         <i v-if="item.children[0].meta.icon" :class="item.children[0].meta.icon"></i>
+        <!--element的插槽，不是自己写的-->
         <span slot="title">{{ item.children[0].meta.title }}</span>
       </el-menu-item>
       <!-- 多个子元素 -->

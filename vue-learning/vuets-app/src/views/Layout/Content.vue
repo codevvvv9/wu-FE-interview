@@ -12,7 +12,13 @@
         <i class="fa fa-reorder"></i>
         <el-breadcrumb class="breadcrumb" separator="/">
           <el-breadcrumb-item>
-            2
+            活动管理
+          </el-breadcrumb-item>
+          <el-breadcrumb-item>
+            活动管理
+          </el-breadcrumb-item>
+          <el-breadcrumb-item>
+            活动管理
           </el-breadcrumb-item>
         </el-breadcrumb>
       </div>
