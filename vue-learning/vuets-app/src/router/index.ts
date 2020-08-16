@@ -31,6 +31,84 @@ export const asyncRouterMap = [
     ]
   },
   {
+    path: '/dataManager',
+    name: 'dataManager',
+    component: Layout,
+    redirect: "/tableData",
+    hidden: true,
+    meta: {title: "数据管理", icon: "fa fa-database"},
+    children: [
+      {
+        path: "/tableData",
+        name: "tableData",
+        meta: {
+          title: "表格管理",
+          icon: "fa fa-table",
+        },
+        component: () => import("@/views/DataManager/DataTable.vue")
+      },
+      {
+        path: "/chartsData",
+        name: "chartsData",
+        meta: {
+          title: "图表管理",
+          icon: "fa fa-bar-chart",
+        },
+        component: () => import("@/views/DataManager/DataCharts.vue")
+      },
+      {
+        path: "/formData",
+        name: "formData",
+        meta: {
+          title: "表单管理",
+          icon: "fa fa-file-text-o",
+          roles: ["admin", "editor"]
+        },
+        component: () => import("@/views/DataManager/DataForm.vue")
+      },
+    ]
+  },
+  {
+    path: '/UserManager',
+    name: 'UserManager',
+    component: Layout,
+    hidden: true,
+    redirect: '/UserAccount',
+    children: [
+      {
+        path: '/UserAccount',
+        name: 'UserAccount',
+        meta: { title: '账户管理', icon: 'fa fa-user-plus', roles: ['admin'] },
+        component: () => import('@/views/UserManager/UserAccount.vue')
+      }
+    ]
+  },
+  {
+    path: '/user',
+    hidden: false,
+    redirect: "/userInfo",
+    component: Layout,
+    children: [
+      {
+        path: '/userInfo',
+        name: 'userInfo',
+        meta: { title: '个人中心' },
+        component: () => import('@/views/UserManager/UserInfo.vue')
+      }
+    ]
+  },
+  {
+    path: '/404',
+    name: '404',
+    hidden: false,
+    meta: { title: '404' },
+    component: () => import('@/views/404.vue')
+  },
+  {
+    path: '*',
+    redirect: '/404'
+  },
+  {
     path: '/login',
     name: 'login',
     hidden: false,
