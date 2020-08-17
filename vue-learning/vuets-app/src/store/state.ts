@@ -1,6 +1,6 @@
 const state: {
   user: String,
-  routers: Array<String>
+  routers: Array<Object>
 } = {
   user: "",
   routers: []

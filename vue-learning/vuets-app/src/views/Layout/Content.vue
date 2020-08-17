@@ -1,7 +1,7 @@
 <template>
   <el-container class="layout-content">
     <!-- 左侧菜单 -->
-    <el-aside>
+    <el-aside width="200px">
       <slot name="left"></slot>
     </el-aside>
 
@@ -11,14 +11,12 @@
       <div class="top">
         <i class="fa fa-reorder"></i>
         <el-breadcrumb class="breadcrumb" separator="/">
-          <el-breadcrumb-item>
-            活动管理
-          </el-breadcrumb-item>
-          <el-breadcrumb-item>
-            活动管理
-          </el-breadcrumb-item>
-          <el-breadcrumb-item>
-            活动管理
+          <el-breadcrumb-item
+            v-for="(item, index) in breadCrumbItems"
+            :key="index"
+            :to="{path: item.path}"
+          > 
+            {{ item.title }}
           </el-breadcrumb-item>
         </el-breadcrumb>
       </div>
@@ -31,12 +29,39 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Provide } from "vue-property-decorator";
+import { Component, Vue, Provide, Watch } from "vue-property-decorator";
 @Component ({
   components: {}
 })
 
-export default class Content extends Vue {}
+export default class Content extends Vue {
+  @Provide() breadCrumbItems: Array<Object> //面包屑的数组
+
+  @Watch("$route") handleRouteChange(to: any) {
+    console.log("Content -> @Watch -> to", to)
+    this.initBreadCrumbItems(to)
+  }
+  created() {
+    this.initBreadCrumbItems(this.$route);
+  }
+
+  initBreadCrumbItems(router: any) {
+    //写出跟路由 title
+    let breadCrumbItems: any = [{ path: "/", title: "后台管理系统"}]
+
+    //遍历父级到当前子路由的title和path，存储到数组中
+    for (const key in router.matched) {
+      if (router.matched[key].meta && router.matched[key].meta.title) {
+        breadCrumbItems.push({
+          path: router.matched[key].path ? router.matched[key].path : "/",
+          title: router.matched[key].meta.title
+        })
+      }
+    }
+
+    this.breadCrumbItems = breadCrumbItems
+  }
+}
 </script>
 
 <style lang="scss" scoped>
