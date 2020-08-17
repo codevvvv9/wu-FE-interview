@@ -62,7 +62,7 @@ export default class UserInfo extends Vue {
           message: result.data.msg,
           type: "success"
         })
-      }).catch((err) => {
+      }).catch((err: any) => {
         this.loading = false
       });
 
