@@ -43,3 +43,12 @@ export default class 组件名 extends Vue {
   this.actions中的方法()
 }
 ```
+
+# 登录页
+- 测试账户信息如下所示：
+```javascript
+{
+  username: "admin",
+  password: "123456"
+}
+```
