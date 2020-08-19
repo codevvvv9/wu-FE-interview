@@ -63,13 +63,17 @@
       >
       </el-pagination>
     </div>
+    <DataTableEdit :dialogVisible="dialogVisible" :form="formData" @closeDialog="closeDialog"></DataTableEdit>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue, Provide, Prop } from "vue-property-decorator";
+import DataTableEdit from "./DataTableEdit.vue";
 @Component({
-  components: {},
+  components: {
+    DataTableEdit
+  },
 })
 export default class DataTable extends Vue {
   @Provide() searchValue: String = ""; //搜索框
