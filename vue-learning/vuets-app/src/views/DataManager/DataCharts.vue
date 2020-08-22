@@ -1,14 +1,14 @@
 <template>
-  <div>
+  <div class="charts-data">
     <el-tabs type="border-card" v-model="tabPosition">
       <el-tab-pane label="折线图" name="line">
-        折线图
+        <Charts :chartData="chartData" chartType="line"></Charts>
       </el-tab-pane>
       <el-tab-pane label="柱状图" name="bar">
-
+        <Charts :chartData="chartData" chartType="bar"></Charts>
       </el-tab-pane>
       <el-tab-pane label="饼图" name="pie">
-
+        <Charts :chartData="chartData" chartType="pie"></Charts>
       </el-tab-pane>
     </el-tabs>
   </div>
@@ -16,14 +16,22 @@
 
 <script lang="ts">
 import { Component, Vue, Provide } from "vue-property-decorator";
+import Charts from "../../components/Charts.vue";
 @Component({
-  components: {},
+  components: {
+    Charts
+  },
 })
 export default class DataCharts extends Vue {
-  @Provide() tabPosition: String = "line"
+  @Provide() tabPosition: String = "line";
+  @Provide() chartData: {
+    xAxisData: Array<string>;
+    yAxisData: number[];
+  } = {
+    xAxisData: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+    yAxisData: [820, 932, 901, 934, 1290, 1330, 1320],
+  };
 }
 </script>
 
-<style>
-
-</style>
+<style></style>
