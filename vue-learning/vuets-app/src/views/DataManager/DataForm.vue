@@ -10,9 +10,8 @@ import { Component, Vue } from "vue-property-decorator";
   components: {},
 })
 export default class DataForm extends Vue {
+  resetForm(formName: string) {}
 }
 </script>
 
-<style>
-
-</style>
+<style></style>
