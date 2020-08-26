@@ -1,0 +1,78 @@
+<!--
+@author wushaolin
+@email wslsdust@163.com
+@create date 2020-08-26 23:14:42
+@modify date 2020-08-26 23:14:42
+@desc [手写vue的精髓]
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>手写vue精髓</title>
+  </head>
+  <body>
+    <div id="app">
+      <p>{{msg}}</p>
+      <p>{{msg}}</p>
+      <p>{{ msg }}</p>
+      <p>{{hello}}</p>
+    </div>
+    <script>
+      let bindingMark = "data-element-binding";
+
+      function Element(id, initData) {
+        let self = this,
+          el = (self.el = document.getElementById(id)),
+          bindings = {},
+          data = (self.data = {}),
+          content = el.innerHTML.replace(/\{\{(.*)\}\}/g, markToken);
+
+        el.innerHTML = content;
+
+        for (const variable in bindings) {
+          bind(variable);
+        }
+
+        if (initData) {
+          for (const variable in initData) {
+            data[variable] = initData[variable];
+          }
+        }
+
+        function markToken(match, variable) {
+          bindings[variable] = {};
+          // return `<span ${bindingMark}="${variable}"></span>`;
+          return "<span " + bindingMark + '="' + variable + '"></span>';
+        }
+
+        function bind(variable) {
+          bindings[variable].els = el.querySelectorAll(
+            // `[${bindingMark}="${variable}"]`
+            "[" + bindingMark + '="' + variable + '"]'
+          );
+          [].forEach.call(bindings[variable].els, function (e) {
+            e.removeAttribute(bindingMark);
+          });
+
+          Object.defineProperty(data, variable, {
+            set: function (newValue) {
+              [].forEach.call(bindings[variable].els, function (e) {
+                bindings[variable].value = e.textContent = newValue;
+              });
+            },
+            get: function () {
+              return bindings[variable].value;
+            },
+          });
+        }
+      }
+
+      var app = new Element("app", {
+        msg: "hello",
+      });
+    </script>
+  </body>
+</html>
