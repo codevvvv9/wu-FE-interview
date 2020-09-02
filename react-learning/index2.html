@@ -6,6 +6,22 @@
   <title>结构复用</title>
 </head>
 <body>
-  
+  <div class="wrapper"></div>
+  <script>
+    class LikeButton {
+      render() {
+        return `
+        <button class="like-btn">
+          <span class="like-text">点赞</span>
+          <span>👍</span>
+        </button>
+        `
+      }
+    }
+
+    const wrapper = document.querySelector('.wrapper')
+    const likeButton1 = new LikeButton()
+    wrapper.innerHTML = likeButton1.render()
+  </script>
 </body>
 </html>
