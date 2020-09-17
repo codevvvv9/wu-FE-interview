@@ -19,3 +19,7 @@ program.version('0.0.1') //定义版本号
 
 program.parse(process.argv); //解析命令行的参数
 ```
+
+## 使用百度翻译的API
+
+## 使用https(nodejs)模块请求API

@@ -13,6 +13,8 @@
     "commander": "^6.1.0"
   },
   "devDependencies": {
-    "@types/node": "^14.10.1"
+    "@types/md5": "^2.2.0",
+    "@types/node": "^14.10.1",
+    "md5": "^2.3.0"
   }
 }
