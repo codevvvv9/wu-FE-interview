@@ -16,21 +16,21 @@ export const translate = (word: string) => {
     salt: salt,
     sign: sign,
   });
-  const options = {
-    hostname: "www.baidu.com",
-    port: 443,
-    path: "/",
-    method: "GET",
-  };
   // const options = {
-  //   hostname: "api.fanyi.baidu.com",
+  //   hostname: "www.baidu.com",
   //   port: 443,
-  //   path: "/api/trans/vip/translate" + query,
+  //   path: "/",
   //   method: "GET",
   // };
+  const options = {
+    hostname: "api.fanyi.baidu.com",
+    port: 443,
+    path: "/api/trans/vip/translate?" + query,
+    method: "GET",
+  };
 
   const req = https.request(options, (res) => {
-    res.on("data", (d) => {
+    res.on("data", (d: any) => {
       console.log("translate -> d", d)
       process.stdout.write(d);
     });

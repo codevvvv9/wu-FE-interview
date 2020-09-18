@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <p>{{msg}}</p>
+      <p>{{msg}}</p>
+      <p>{{msg}}</p>
+      <p>{{msg}}</p>
+      <p>{{msg}}</p>
+    </div>
+    <script>
+      let bindingMark = "data-element-binding";
+
+      function Element(id, initData) {
+        let self = this,
+          el = document.getElementById(id),
+          bindings = {},
+          data = {},
+          content = el.innerHTML.replace(/\{\{(.*)\}\}/g, markToken);
+
+        el.innerHTML = content;
+
+        for (const variable in bindings) {
+          if (bindings.hasOwnProperty(variable)) {
+            bind(variable);
+          }
+        }
+
+        if (initData) {
+          for (const variable in initData) {
+            if (initData.hasOwnProperty(variable)) {
+              data[variable] = initData[variable];
+            }
+          }
+        }
+
+        function markToken(match, variable) {
+          bindings[variable] = {};
+          return `<span bindingMark="${variable}"></span>`;
+        }
+
+        function bind(variable) {
+          let els = (bindings[variable].els = el.querySelectorAll(
+            `[bindingMark="${variable}"]`
+          ));
+          [].forEach.call(els, (e) => {
+            e.removeAttribute(bindingMark);
+          });
+
+          Object.defineProperty(data, variable, {
+            set(newValue) {
+              [].forEach.call(bindings[variable].els, (e) => {
+                bindings[variable].value = e.textContent = newValue;
+              });
+            },
+
+            get() {
+              return bindings[variable].value;
+            },
+          });
+        }
+      }
+
+      let app = new Element("app", {
+        msg: "hello"
+      })
+    </script>
+  </body>
+</html>
