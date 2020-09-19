@@ -1,8 +1,14 @@
 {
-  "name": "fanyi",
-  "version": "0.0.1",
+  "name": "fanyi-winder",
+  "version": "0.0.4",
   "description": "nodejs cli",
-  "main": "index.js",
+  "main": "dist/main.js",
+  "bin": {
+    "f1": "dist/cli.js"
+  },
+  "files": [
+    "dist/**/*.js"
+  ],
   "scripts": {
     "start": "ts-node-dev src/main.ts",
     "cli": "ts-node-dev src/cli.ts"
@@ -10,11 +16,11 @@
   "author": "wushaolin",
   "license": "MIT",
   "dependencies": {
-    "commander": "^6.1.0"
+    "commander": "^6.1.0",
+    "md5": "^2.3.0"
   },
   "devDependencies": {
     "@types/md5": "^2.2.0",
-    "@types/node": "^14.10.1",
-    "md5": "^2.3.0"
+    "@types/node": "^14.10.1"
   }
 }
