@@ -2,6 +2,7 @@ import * as https from "https";
 import md5 from "md5";
 import * as querystring from "querystring";
 import { appId, appSecret } from "./private";
+
 type ErrorMap = {
   [key: string]: string;
 };
@@ -40,7 +41,7 @@ export const translate = (word: string) => {
   };
 
   const request = https.request(options, (response) => {
-    let chunks: Buffer[] = [];
+    const chunks: Buffer[] = [];
     response.on("data", (chunk: Buffer) => {
       chunks.push(chunk);
     });
