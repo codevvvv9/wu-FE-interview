@@ -10,4 +10,5 @@
 
 ## `pipe` method
 
+`readable.pipe(writable)`
 ## 输出
