@@ -21,9 +21,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+console.log('this is app.ts');
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-console.log('this is app.ts');
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
