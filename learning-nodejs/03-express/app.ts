@@ -21,6 +21,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// use中间的就是传说中的中间件
+
 console.log('this is app.ts');
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
