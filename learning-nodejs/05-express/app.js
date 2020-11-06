@@ -22,7 +22,10 @@ app.use(express.urlencoded()) //
 // app.get('/test', (req, res, next) => {
 //   res.render('demo', {pageTitle: "EJS测试"}) //render的第一个参数就是views里面第一个文件的名字
 // })
-app.use(fn)
+// app.use(fn)
+app.get('/users/:id', (req, res, next) => {
+  console.log('req.params', req.params); //接受路由传递的参数
+})
 app.get('/style.css', (req, res, next) => {
   res.send('style.css')
 })
