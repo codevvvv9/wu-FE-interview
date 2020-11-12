@@ -97,6 +97,7 @@ export default {
           "content-type": "application/json",
         },
         data: JSON.stringify({
+          size: SIZE,
           filename: this.container.file.name,
         }),
       });
