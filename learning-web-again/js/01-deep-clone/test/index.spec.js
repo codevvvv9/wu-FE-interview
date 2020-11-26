@@ -75,4 +75,49 @@ describe("deepClone", () => {
     assert(fun1.xxx.yyy.zzz === fun2.xxx.yyy.zzz);
     assert(fun1(1, 2) === fun2(1, 2));
   });
+
+  it("deepClone能克隆环", () => {
+    const obj = {name: 'wushao'}
+    obj.self = obj
+    const obj1 = deepClone(obj)
+    assert(obj !== obj1)
+    assert(obj.name === obj1.name)
+    assert(obj.self !== obj1.self)
+  })
+
+  it("能够克隆正则表达式", () => {
+    // const regExp = /hi\d+/gi
+    //等价于
+    const regExp = new RegExp("hi\\d+", "gi")
+    regExp.xxx = {yyy: {zzz: 1}}
+    const regExp1 = deepClone(regExp)
+    assert(regExp !== regExp1)
+    assert(regExp.xxx !== regExp1.xxx)
+    assert(regExp.xxx.yyy !== regExp1.xxx.yyy)
+    assert(regExp.xxx.yyy.zzz === regExp1.xxx.yyy.zzz)
+    assert(regExp.flags === regExp1.flags)
+    assert(regExp.source === regExp1.source)
+  })
+
+  it("能够克隆Date", () => {
+    const date = new Date()
+    date.xxx = {yyy: {zzz: 1}}
+    const date1 = deepClone(date)
+    assert(date !== date1)
+    assert(date.xxx !== date1.xxx)
+    assert(date.xxx.yyy !== date1.xxx.yyy)
+    assert(date.xxx.yyy.zzz === date1.xxx.yyy.zzz)
+    assert(date.getTime() === date1.getTime())
+  })
+  it("能够跳过原型属性不克隆", () => {
+    const obj1 = Object.create({name: "a"})
+    obj1.xxx = {yyy: {zzz: 1}}
+    const obj2 = deepClone(obj1)
+    assert(obj1 !== obj2)
+    assert.isTrue("name" in obj1)
+    assert.isFalse("name" in obj2)
+    assert(obj1.xxx !== obj2.xxx)
+    assert(obj1.xxx.yyy !== obj2.xxx.yyy)
+    assert(obj1.xxx.yyy.zzz === obj2.xxx.yyy.zzz)
+  })
 });
