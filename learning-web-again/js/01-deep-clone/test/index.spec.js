@@ -6,7 +6,7 @@ const DeepClone = require("../src/index");
 chai.use(sinonChai);
 
 describe("DeepClone", () => {
-  it("deepClone是一个函数", () => {
+  it("DeepClone是一个构造函数了", () => {
     // assert(typeof DeepClone === "function");
     assert.isFunction(DeepClone)
   });

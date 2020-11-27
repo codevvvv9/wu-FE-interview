@@ -1,8 +1,6 @@
-class DeepClone {
-  constructor() {
-    this.cache = [];
-  }
-  deepClone(source) {
+function DeepClone() {
+  this.cache = [];
+  this.deepClone = function(source) {
     if (source instanceof Object) {
       let cachedSource = this.findCache(source);
       if (cachedSource) {
@@ -34,7 +32,8 @@ class DeepClone {
     }
     return source;
   }
-  findCache(source) {
+
+  this.findCache = function (source) {
     for (let i = 0; i < this.cache.length; i++) {
       if (this.cache[i][0] === source) {
         return this.cache[i][1];
@@ -43,4 +42,5 @@ class DeepClone {
     return undefined;
   }
 }
+
 module.exports = DeepClone;
