@@ -1,0 +1,6 @@
+{
+  "presets": [
+    "@babel/preset-env", //es6的预设
+    "@babel/preset-react" //react的预设
+  ]
+}
