@@ -28,6 +28,17 @@ module.exports = {
   },
   //3、mode有三个值：production(默认值)、development、none，开启之后会启动相应的默认配置函数
   mode: "production",
+  //附加：开启监听
+  watch: true, //开启监听 等同于在package.json中增加 webpack --watch命令
+  // 只有开启监听后下面配置才有用
+  watchOptions: {
+    //使用正则去忽略某些文件，能提高监听的性能，默认为空
+    ignored: /node_modules/, 
+    //聚合等待时间，不会立刻执行
+    aggregateTimeout: 200,
+    //轮询时间，默认一秒轮询1000次
+    poll: 1000
+  },
   //4、loader的使用
   module: {
     rules: [
