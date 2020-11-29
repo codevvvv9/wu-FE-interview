@@ -9,6 +9,7 @@
 "use strict";
 
 const path = require("path");
+const webpack = require("webpack")
 
 module.exports = {
   //1、单入口文件写法如下：
@@ -27,12 +28,12 @@ module.exports = {
     filename: "[name].js",
   },
   //3、mode有三个值：production(默认值)、development、none，开启之后会启动相应的默认配置函数
-  mode: "production",
+  mode: "development",
   //附加：开启监听
   watch: true, //开启监听 等同于在package.json中增加 webpack --watch命令
   // 只有开启监听后下面配置才有用
   watchOptions: {
-    //使用正则去忽略某些文件，能提高监听的性能，默认为空
+    //使用正则去忽略某些文件，能提高监听的性能，默认为空。它是会输出到硬盘中。
     ignored: /node_modules/, 
     //聚合等待时间，不会立刻执行
     aggregateTimeout: 200,
@@ -89,4 +90,17 @@ module.exports = {
       },
     ],
   },
+  //5、plugin的使用。
+  // 以webpack内置的HMR-HotModuleReplacementPlugin（热模块替换，只替换更新的）为例 
+  // WDS-webpack-dev-server的热更新服务器需要这个插件配合使用。
+  //同样实现热更新的还有WDM-webpack-dev-middleware，它将webpack输出文件传输给服务器，更加灵活
+  plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+  ],
+  //开启内置的webpack-dev-server热更新的配置哦
+  //注意：老版本的直接在package.json的scripts使用webpack-dev-server --open，新版本后使用webpack serve
+  devServer: {
+    contentBase: path.join(__dirname, 'dist'), //基础路径
+    hot: true
+  }
 };
