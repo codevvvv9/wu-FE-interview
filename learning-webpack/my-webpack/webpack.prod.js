@@ -9,6 +9,7 @@
 "use strict";
 
 const path = require("path");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 
 module.exports = {
   //1、单入口文件写法如下：
@@ -40,7 +41,7 @@ module.exports = {
         //4.2 解析.css文件，需要style-loader css-loader,链式调用，从右往左,必须先解析.css文件
         test: /.css$/,
         use: [
-          "style-loader", //把css放到style标签里面插进head标签里面
+          MiniCssExtractPlugin.loader, //提取成带指纹的单个css文件，不能与style-loader共存
           "css-loader", //加载css文件，并转换成commonjs对象
         ],
       },
@@ -48,7 +49,7 @@ module.exports = {
         //4.3 解析.css文件，需要style-loader css-loader less-loader, 链式调用，从右往左,必须先解析.less文件
         test: /.less$/,
         use: [
-          "style-loader", //把css放到style标签里面插进head标签里面
+          MiniCssExtractPlugin.loader,
           "css-loader",
           "less-loader", //把less转换成css文件
         ],
@@ -92,4 +93,9 @@ module.exports = {
       // },
     ],
   },
+  plugins: [
+    new MiniCssExtractPlugin({
+      filename: '[name]_[contenthash:8].css'
+    })
+  ]
 };
