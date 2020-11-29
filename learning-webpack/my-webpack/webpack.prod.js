@@ -10,6 +10,8 @@
 
 const path = require("path");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
+const OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin")
+const HtmlWebpackPlugin = require("html-webpack-plugin")
 
 module.exports = {
   //1、单入口文件写法如下：
@@ -94,8 +96,44 @@ module.exports = {
     ],
   },
   plugins: [
+    //1、css提取成单独文件的插件，使用contenthash做指纹
     new MiniCssExtractPlugin({
       filename: '[name]_[contenthash:8].css'
-    })
+    }),
+    //2、压缩css文件的插件，预处理器使用cssnano
+    new OptimizeCssAssetsPlugin({
+      assetNameRegExp: /.css$/g,
+      cssProcessor: require("cssnano")
+    }),
+    //3、压缩html文件，可对应多页面
+    new HtmlWebpackPlugin({
+      // 模板
+      template: path.join(__dirname, 'src/index.html'),
+      filename: 'index.html',
+      chunks: ['index'], //依赖哪个entry
+      inject: true,
+      minify: {
+        html5: true,
+        collapseWhitespace: true,
+        preserveLineBreaks: false, //一行展示html
+        minifyCSS: true,
+        minifyJS: true,
+        removeComments: false
+      }
+    }),
+    new HtmlWebpackPlugin({
+      template: path.join(__dirname, 'src/search.html'),
+      filename: 'search.html',
+      chunks: ['search'], //依赖哪个entry
+      inject: true,
+      minify: {
+        html5: true,
+        collapseWhitespace: true,
+        preserveLineBreaks: false,
+        minifyCSS: true,
+        minifyJS: true,
+        removeComments: false
+      }
+    }),
   ]
 };
