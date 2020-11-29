@@ -10,6 +10,8 @@
 
 const path = require("path");
 const webpack = require("webpack")
+//清理上一次构建目录
+const {CleanWebpackPlugin} = require("clean-webpack-plugin")
 
 module.exports = {
   //1、单入口文件写法如下：
@@ -96,6 +98,7 @@ module.exports = {
   //同样实现热更新的还有WDM-webpack-dev-middleware，它将webpack输出文件传输给服务器，更加灵活
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
+    new CleanWebpackPlugin()
   ],
   //开启内置的webpack-dev-server热更新的配置哦
   //注意：老版本的直接在package.json的scripts使用webpack-dev-server --open，新版本后使用webpack serve

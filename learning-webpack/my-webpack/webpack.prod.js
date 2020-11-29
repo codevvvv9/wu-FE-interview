@@ -9,9 +9,14 @@
 "use strict";
 
 const path = require("path");
+//抽离单独的css文件可使其追加指纹
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
+//压缩css文件
 const OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin")
+//压缩html
 const HtmlWebpackPlugin = require("html-webpack-plugin")
+//清理上一次构建目录
+const {CleanWebpackPlugin} = require("clean-webpack-plugin")
 
 module.exports = {
   //1、单入口文件写法如下：
@@ -135,5 +140,6 @@ module.exports = {
         removeComments: false
       }
     }),
+    new CleanWebpackPlugin(),
   ]
 };
