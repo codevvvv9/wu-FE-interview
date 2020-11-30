@@ -10,13 +10,13 @@
 
 const path = require("path");
 //抽离单独的css文件可使其追加指纹
-const MiniCssExtractPlugin = require("mini-css-extract-plugin")
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 //压缩css文件
-const OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin")
+const OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 //压缩html
-const HtmlWebpackPlugin = require("html-webpack-plugin")
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 //清理上一次构建目录
-const {CleanWebpackPlugin} = require("clean-webpack-plugin")
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 module.exports = {
   //1、单入口文件写法如下：
@@ -48,8 +48,17 @@ module.exports = {
         //4.2 解析.css文件，需要style-loader css-loader,链式调用，从右往左,必须先解析.css文件
         test: /.css$/,
         use: [
-          MiniCssExtractPlugin.loader, //提取成带指纹的单个css文件，不能与style-loader共存
-          "css-loader", //加载css文件，并转换成commonjs对象
+          // MiniCssExtractPlugin.loader, //提取成带指纹的单个css文件，不能与style-loader共存
+          // "css-loader", //加载css文件，并转换成commonjs对象
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              publicPath: "", //显式指定publicPath防止下面指定浏览器时报错
+            },
+          },
+          {
+            loader: "css-loader",
+          },
         ],
       },
       {
@@ -58,6 +67,39 @@ module.exports = {
         use: [
           MiniCssExtractPlugin.loader,
           "css-loader",
+          
+          {
+            loader: "postcss-loader",
+            options: {
+              //给css属性加上前缀
+              //3版本这么写
+              // plugins: () => [
+              //   require('autoprefixer')({
+              //     Browserslist: ['last 2 version', '>1%', 'ios7']
+              //   })
+              // ],
+              //4版本需要这么写，还有手动升级postcss到8.1
+              postcssOptions: {
+                plugins: [
+                  [
+                    "autoprefixer",
+                    {
+                      //要想这个autoprefixer生效还可以在package.json中添加
+                      // "browserslist": [
+                      //   "> 1%",
+                      //   "last 2 versions"
+                      // ]
+                      //加上这句才能生效
+                      "overrideBrowserslist": [
+                        "> 1%",
+                        "last 2 versions"
+                      ]
+                    },
+                  ],
+                ],
+              },
+            },
+          },
           "less-loader", //把less转换成css文件
         ],
       },
@@ -66,11 +108,11 @@ module.exports = {
         test: /.(png|img|jpg|jpeg|gif)$/,
         use: [
           {
-            loader: 'file-loader',
+            loader: "file-loader",
             options: {
-              name: '[name]_[hash:8].[ext]'
-            }
-          }
+              name: "[name]_[hash:8].[ext]",
+            },
+          },
         ],
       },
       {
@@ -78,11 +120,11 @@ module.exports = {
         test: /.(woff|woff2|eot|ttf|otf)$/,
         use: [
           {
-            loader: 'file-loader',
+            loader: "file-loader",
             options: {
-              name: '[name]_[hash:8].[ext]'
-            }
-          }
+              name: "[name]_[hash:8].[ext]",
+            },
+          },
         ],
       },
       // {
@@ -103,19 +145,19 @@ module.exports = {
   plugins: [
     //1、css提取成单独文件的插件，使用contenthash做指纹
     new MiniCssExtractPlugin({
-      filename: '[name]_[contenthash:8].css'
+      filename: "[name]_[contenthash:8].css",
     }),
     //2、压缩css文件的插件，预处理器使用cssnano
     new OptimizeCssAssetsPlugin({
       assetNameRegExp: /.css$/g,
-      cssProcessor: require("cssnano")
+      cssProcessor: require("cssnano"),
     }),
     //3、压缩html文件，可对应多页面
     new HtmlWebpackPlugin({
       // 模板
-      template: path.join(__dirname, 'src/index.html'),
-      filename: 'index.html',
-      chunks: ['index'], //依赖哪个entry
+      template: path.join(__dirname, "src/index.html"),
+      filename: "index.html",
+      chunks: ["index"], //依赖哪个entry
       inject: true,
       minify: {
         html5: true,
@@ -123,13 +165,13 @@ module.exports = {
         preserveLineBreaks: false, //一行展示html
         minifyCSS: true,
         minifyJS: true,
-        removeComments: false
-      }
+        removeComments: false,
+      },
     }),
     new HtmlWebpackPlugin({
-      template: path.join(__dirname, 'src/search.html'),
-      filename: 'search.html',
-      chunks: ['search'], //依赖哪个entry
+      template: path.join(__dirname, "src/search.html"),
+      filename: "search.html",
+      chunks: ["search"], //依赖哪个entry
       inject: true,
       minify: {
         html5: true,
@@ -137,9 +179,9 @@ module.exports = {
         preserveLineBreaks: false,
         minifyCSS: true,
         minifyJS: true,
-        removeComments: false
-      }
+        removeComments: false,
+      },
     }),
     new CleanWebpackPlugin(),
-  ]
+  ],
 };
