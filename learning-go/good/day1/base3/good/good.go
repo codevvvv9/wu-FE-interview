@@ -46,6 +46,8 @@ func (engine *Engine) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 	if ok {
 		handler(w, req)
 	} else {
+		//404响应头
+		w.WriteHeader(http.StatusNotFound)
 		fmt.Fprintf(w, "404 Not Found: %s\n", req.URL)
 	}
 }
