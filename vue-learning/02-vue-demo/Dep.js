@@ -1,5 +1,5 @@
 /**
- * 依赖收集
+ * 依赖收集，相当于key 的依赖者容器
  */
 class Dep {
     constructor() {

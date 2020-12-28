@@ -1,5 +1,5 @@
 /**
- * 观察者
+ * 观察者，其实应该是依赖者 组件 实例等
  */
 let Dep = require("./Dep")
 class Watcher {
