@@ -1,4 +1,4 @@
-//MutationObserver是监视DOM变化的异步API
+//MutationObserver是监视DOM变化的异步API, 异步回调
 let mutationObserver = new MutationObserver(function (mutations, observer) {
   mutations.forEach(mutation => {
     console.log('mutation is', mutation);
