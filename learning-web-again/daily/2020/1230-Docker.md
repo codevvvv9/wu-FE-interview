@@ -59,6 +59,8 @@ ENTRYPOINT /ginvue/app
 `docker run -i -t ubuntu:16.04 /bin/bash`
 ### 4. 查看正在运行的容器信息
 `docker ps`
+查看所有容器
+`docker ps -a`
 ### 5. 停止正在运行的容器
 `docker stop 容器的名字`或者`docker kill 容器的名字`
 ### 6. 重启被停止的容器
@@ -72,3 +74,12 @@ ENTRYPOINT /ginvue/app
 当把所有停着的使用镜像的容器都删除之后才能删除这个镜像
 `docker rmi 镜像名字`
 
+{
+  "registry-mirrors": [
+    "https://dockerhub.azk8s.cn",
+    "https://hub-mirror.c.163.com"
+  ],
+  "insecure-registries": [],
+  "debug": false,
+  "experimental": true
+}
