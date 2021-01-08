@@ -6,19 +6,19 @@
  * @desc [使用async/await改造getResult]
  */
 
- async function getResult() {
-     try {
-         let id_res = await fetch(id_url)
-         let id_text = await id_res.text()
+async function getResult() {
+  try {
+    let id_res = await fetch(id_url);
+    let id_text = await id_res.text();
 
-         let new_name_url = name_url + "?id=" + id_text
-         
-         let name_res = await fetch(new_name_url)
-         let name_text = await name_res.text()
-     } catch (error) {
-        console.error(error);
-     }
- }
+    let new_name_url = name_url + "?id=" + id_text;
+
+    let name_res = await fetch(new_name_url);
+    let name_text = await name_res.text();
+  } catch (error) {
+    console.error(error);
+  }
+}
 
 /**
  * 上面这种写法是不是很像同步写法
