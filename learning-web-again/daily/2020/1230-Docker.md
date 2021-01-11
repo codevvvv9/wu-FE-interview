@@ -24,7 +24,7 @@ RUN go env -w GOPROXY=https://goproxy.cn,https://goproxy.io,direct
 COPY . .
 RUN go env && go list && go build -o app main.go
 
-# 对外暴露的宿主机端口，可写可不写
+# 对外暴露的容器端口，就是你代码里面写的那个端口
 EXPOSE 8888
 ENTRYPOINT /ginvue/app
 
