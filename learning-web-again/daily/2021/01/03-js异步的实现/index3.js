@@ -19,21 +19,19 @@
  * es6引入了生成器就是为了上述两个关键点而设计的
 */
 
-
 //1、使用生成器的方式写的伪代码
 function* getResult() {
-    yield 'getUserID'
-    yield 'getUserName'
-    
-    return 'name'
-    
+  yield "getUserID";
+  yield "getUserName";
+
+  return "name";
 }
 
-let result = getResult()
+let result = getResult();
 
-result.next().value //userID
-result.next().value //userName
-result.next().value // 返回真实的名字
+result.next().value; //userID
+result.next().value; //userName
+result.next().value; // 返回真实的名字
 
 //上面代码的实现原理使用了协程的概念，协程是线程的更轻量级的实现
 //线程里面可以有多个协程，但是只能同时运行一个协程，而且他的控制权不在系统内核，在用户态。
@@ -42,28 +40,33 @@ result.next().value // 返回真实的名字
 //2、真正使用
 
 function* getResult() {
-   let id_res = yield fetch(id_url)
-   console.log('id_res', id_res); 
-   let id_text = yield id_res.text()
-   console.log('id_text', id_text);
-   
-   let new_name_url = name_url + '?id=' + id_text
-   console.log('new_name_url', new_name_url);
-   
-   let name_res = yield fetch(new_name_url)
-   console.log('name_res', name_res);
-   let name_text = yield name_res.text()
-   console.log('name_text', name_text);
+  let id_res = yield fetch(id_url);
+  console.log("id_res", id_res);
+  let id_text = yield id_res.text();
+  console.log("id_text", id_text);
+
+  let new_name_url = name_url + "?id=" + id_text;
+  console.log("new_name_url", new_name_url);
+
+  let name_res = yield fetch(new_name_url);
+  console.log("name_res", name_res);
+  let name_text = yield name_res.text();
+  console.log("name_text", name_text);
 }
 
-let result = getResult()
+let result = getResult();
 
-result.next().value.then(res => {
-    return result.next(res).value
-}).then(res => {
-    return result.next(res).value
-}).then(res => {
-    return result.next(res).value
-}).then(res => {
-    return result.next(res).value
-})
+result
+  .next()
+  .value.then((res) => {
+    return result.next(res).value;
+  })
+  .then((res) => {
+    return result.next(res).value;
+  })
+  .then((res) => {
+    return result.next(res).value;
+  })
+  .then((res) => {
+    return result.next(res).value;
+  });
