@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function loadScript(src, callback) {
+            console.log('loadScript start');
+            let script = document.createElement('script')
+            script.src = src
+            script.onload = () => callback(null, script)
+            script.onerror = () => callback(new Error(`Script load error for ${src}`))
+
+            document.head.append(script)
+            console.log('loadScript end');                 
+        }
+        loadScript('./script.js', function (error, script) {
+            //错误优先的回调写法
+            if (error) {
+                console.error('error is', error);
+            } else {
+                newFunction()
+            }
+            //多层回调
+            // loadScript('./script2.js', function () {
+            //     newFunction2()
+            // })
+        })
+        console.log('script');
+    </script>
+</body>
+</html>

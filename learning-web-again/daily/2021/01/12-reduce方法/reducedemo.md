@@ -18,3 +18,4 @@ Array.prototype.reduce(callback(accumulator, currentValue, currentIndex, sourceA
 9. 顺序执行promise
 10. 函数管道化
 11. 替换map()
+12. 数组里面是对象 根据对象的某个属性去重
